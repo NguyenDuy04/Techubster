@@ -1,8 +1,21 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
+const withNextIntl = createNextIntlPlugin();
 const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true,
+    allowedDevOrigins: ["127.0.0.1", "localhost"],
+    reactCompiler: true,
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "placehold.co",
+            },
+        ],
+        dangerouslyAllowSVG: true,
+        contentDispositionType: "attachment",
+        contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
